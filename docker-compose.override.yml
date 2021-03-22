@@ -3,4 +3,19 @@ services:
 
   zammad-nginx:
     ports:
-      - "80:80"
+      - "3000:80"
+    volumes:
+      - zammad-data:/opt/zammad
+      - ./custom/zammad.conf:/opt/zammad/contrib/nginx/zammad.conf
+  # To avoid running: rails r "Setting.set('es_url', 'http://elasticsearch.tickets.4talent.cl:9200')"
+  zammad-init:
+    environment:
+      ELASTICSEARCH_HOST: elasticsearch.tickets.4talent.cl
+  zammad-railsserver:
+    environment:
+      ELASTICSEARCH_HOST: elasticsearch.tickets.4talent.cl
+  # For backup restore
+  #zammad-postgresql:
+  #  volumes:
+  #    - zammad-data:/opt/zammad
+  #    - zammad-backup:/var/tmp/zammad:ro
