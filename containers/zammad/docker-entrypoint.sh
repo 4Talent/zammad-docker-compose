@@ -4,7 +4,7 @@ set -e
 
 : "${AUTOWIZARD_JSON:=''}"
 : "${ELASTICSEARCH_ENABLED:=true}"
-: "${ELASTICSEARCH_HOST:=zammad-elasticsearch}"
+: "${ELASTICSEARCH_HOST:=elasticsearch.tickets.4talent.cl}"
 : "${ELASTICSEARCH_PORT:=9200}"
 : "${ELASTICSEARCH_SCHEMA:=http}"
 : "${ELASTICSEARCH_NAMESPACE:=zammad}"

@@ -19,7 +19,7 @@ ENV ZAMMAD_USER zammad
 SHELL ["/bin/bash", "-e", "-o", "pipefail", "-c"]
 
 # install zammad
-COPY containers/zammad/setup.sh /tmp
+COPY setup.sh /tmp
 RUN chmod +x /tmp/setup.sh; \
     /tmp/setup.sh builder
 
@@ -48,7 +48,7 @@ ENV ZAMMAD_READY_FILE ${ZAMMAD_DIR}/tmp/zammad.ready
 ENV ZAMMAD_TMP_DIR /tmp/zammad-${GIT_BRANCH}
 ENV ZAMMAD_USER zammad
 
-COPY containers/zammad/setup.sh /tmp
+COPY setup.sh /tmp
 RUN chmod +x /tmp/setup.sh; \
     /tmp/setup.sh runner
 
@@ -56,7 +56,7 @@ COPY --from=builder ${ZAMMAD_TMP_DIR} ${ZAMMAD_TMP_DIR}
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 
 # docker init
-COPY containers/zammad/docker-entrypoint.sh /
+COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
